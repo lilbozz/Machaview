@@ -1,0 +1,140 @@
+{
+  "splash": {
+    "title": "Machaview",
+    "subtitle": "by Paggy Industries"
+  },
+  "getStarted": {
+    "tagline": "See Smarter. Live Seamless.",
+    "getStarted": "Get Started",
+    "signIn": "Sign In"
+  },
+  "register": {
+    "title": "Create Account",
+    "fullName": "Full Name",
+    "email": "Email",
+    "password": "Password",
+    "confirmPassword": "Confirm Password",
+    "submit": "Create Account",
+    "hasAccount": "Already have an account?",
+    "signIn": "Sign In",
+    "strength": "Password Strength",
+    "weak": "Weak",
+    "fair": "Fair",
+    "strong": "Strong"
+  },
+  "login": {
+    "title": "Welcome Back",
+    "email": "Email",
+    "password": "Password",
+    "submit": "Sign In",
+    "forgotPassword": "Forgot password?",
+    "noAccount": "Don't have an account?",
+    "register": "Create one"
+  },
+  "tabs": {
+    "home": "Home",
+    "ai": "AI",
+    "media": "Media",
+    "settings": "Settings"
+  },
+  "home": {
+    "greeting": "Good",
+    "morning": "Morning",
+    "afternoon": "Afternoon",
+    "evening": "Evening",
+    "deviceStatus": "Device Status",
+    "connected": "Connected",
+    "battery": "Battery",
+    "firmware": "Firmware",
+    "upToDate": "Up to date",
+    "quickActions": "Quick Actions",
+    "askAI": "Ask AI",
+    "capture": "Capture",
+    "navigate": "Navigate",
+    "translate": "Translate",
+    "hudPreview": "HUD Preview",
+    "hudPreviewDesc": "View your glasses display",
+    "nightHud": "Night HUD",
+    "nightHudDesc": "Activate night vision overlay"
+  },
+  "ai": {
+    "title": "Machaview AI",
+    "placeholder": "Ask me anything about Machaview...",
+    "listening": "Listening",
+    "processing": "Processing",
+    "thinking": "Thinking..."
+  },
+  "media": {
+    "title": "Media",
+    "photos": "Photos",
+    "videos": "Videos",
+    "noMedia": "No media yet",
+    "noMediaDesc": "Photos and videos captured with your Machaview will appear here.",
+    "captureFirst": "Start capturing"
+  },
+  "settings": {
+    "title": "Settings",
+    "language": "Language",
+    "theme": "Theme",
+    "dark": "Dark",
+    "light": "Light",
+    "auto": "Auto",
+    "safety": "Safety Alerts",
+    "safetyDesc": "Get alerts for nearby hazards",
+    "gestures": "Gesture Customization",
+    "gesturesDesc": "Configure blink, nod, and tap gestures",
+    "firmware": "Firmware",
+    "firmwareVersion": "v2.4.1",
+    "firmwareStatus": "Up to date",
+    "deviceBattery": "Device Battery",
+    "signOut": "Sign Out",
+    "about": "About",
+    "version": "Version 1.0.0"
+  },
+  "popup": {
+    "welcome": "Welcome to Machaview",
+    "welcomeDesc": "Your AI-powered smart glasses are ready to go.",
+    "features": "Discover New Features",
+    "featuresDesc": "Explore AI Assistant, Real-time Translation, and AR Navigation.",
+    "lowBattery": "Low Battery",
+    "lowBatteryDesc": "Device battery is at 15%. Please charge soon.",
+    "nightMode": "Night Vision Mode",
+    "nightModeDesc": "Enhanced night vision is now active.",
+    "dismiss": "Dismiss",
+    "explore": "Explore",
+    "langChanged": "Language Changed",
+    "langChangedDesc": "Interface has been switched to English."
+  },
+  "devicePanel": {
+    "title": "Device Status",
+    "battery": "Battery",
+    "connectivity": "Connectivity",
+    "bluetooth": "Bluetooth 5.3",
+    "aiCloud": "AI Cloud",
+    "active": "Active",
+    "firmware": "Firmware",
+    "temperature": "Temperature",
+    "syncStatus": "Sync Status",
+    "synced": "Synced",
+    "connected": "Connected"
+  },
+  "investor": {
+    "hero": "Shaping the Future of Augmented Reality",
+    "heroSub": "Machaview is the next-generation AI smart glasses platform by Paggy Industries.",
+    "product": "Product Overview",
+    "productDesc": "1080p transparent AR HUD, 12-hour battery, bone conduction audio, real-time translation, voice commands, danger alerts.",
+    "market": "Market Positioning",
+    "marketDesc": "Premium wearable AI platform targeting early adopters and enterprise users in a $45B AR market.",
+    "vision": "Vision Statement",
+    "visionDesc": "By 2030, bring augmented reality experiences to 1 billion people through intelligent eyewear.",
+    "subscription": "Subscription Model",
+    "subscriptionDesc": "$199/year includes AI cloud processing, OTA updates, and priority support.",
+    "roadmap": "Future Roadmap",
+    "roadmapItems": ["Q3 2026 - Public Beta Launch", "Q4 2026 - Enterprise SDK Release", "Q1 2027 - Prescription Lens Support", "Q2 2027 - Full AR App Marketplace", "Q4 2027 - Next-gen Hardware v2"],
+    "metrics": "Growth Metrics",
+    "preorders": "Pre-orders",
+    "revenue": "Projected ARR",
+    "markets": "Target Markets",
+    "backToApp": "Back to App"
+  }
+}

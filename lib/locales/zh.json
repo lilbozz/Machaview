@@ -1,0 +1,140 @@
+{
+  "splash": {
+    "title": "Machaview",
+    "subtitle": "Paggy Industries \u51fa\u54c1"
+  },
+  "getStarted": {
+    "tagline": "\u667a\u80fd\u89c6\u89d2\uff0c\u65e0\u7f1d\u751f\u6d3b",
+    "getStarted": "\u5f00\u59cb\u4f7f\u7528",
+    "signIn": "\u767b\u5f55"
+  },
+  "register": {
+    "title": "\u521b\u5efa\u8d26\u6237",
+    "fullName": "\u59d3\u540d",
+    "email": "\u7535\u5b50\u90ae\u4ef6",
+    "password": "\u5bc6\u7801",
+    "confirmPassword": "\u786e\u8ba4\u5bc6\u7801",
+    "submit": "\u521b\u5efa\u8d26\u6237",
+    "hasAccount": "\u5df2\u6709\u8d26\u6237\uff1f",
+    "signIn": "\u767b\u5f55",
+    "strength": "\u5bc6\u7801\u5f3a\u5ea6",
+    "weak": "\u5f31",
+    "fair": "\u4e2d",
+    "strong": "\u5f3a"
+  },
+  "login": {
+    "title": "\u6b22\u8fce\u56de\u6765",
+    "email": "\u7535\u5b50\u90ae\u4ef6",
+    "password": "\u5bc6\u7801",
+    "submit": "\u767b\u5f55",
+    "forgotPassword": "\u5fd8\u8bb0\u5bc6\u7801\uff1f",
+    "noAccount": "\u8fd8\u6ca1\u6709\u8d26\u6237\uff1f",
+    "register": "\u521b\u5efa\u8d26\u6237"
+  },
+  "tabs": {
+    "home": "\u9996\u9875",
+    "ai": "AI",
+    "media": "\u5a92\u4f53",
+    "settings": "\u8bbe\u7f6e"
+  },
+  "home": {
+    "greeting": "\u4f60\u597d",
+    "morning": "\u65e9\u4e0a\u597d",
+    "afternoon": "\u4e0b\u5348\u597d",
+    "evening": "\u665a\u4e0a\u597d",
+    "deviceStatus": "\u8bbe\u5907\u72b6\u6001",
+    "connected": "\u5df2\u8fde\u63a5",
+    "battery": "\u7535\u6c60",
+    "firmware": "\u56fa\u4ef6",
+    "upToDate": "\u5df2\u662f\u6700\u65b0",
+    "quickActions": "\u5feb\u901f\u64cd\u4f5c",
+    "askAI": "\u95ee AI",
+    "capture": "\u62cd\u6444",
+    "navigate": "\u5bfc\u822a",
+    "translate": "\u7ffb\u8bd1",
+    "hudPreview": "HUD \u9884\u89c8",
+    "hudPreviewDesc": "\u67e5\u770b\u773c\u955c\u663e\u793a\u5c4f",
+    "nightHud": "\u591c\u89c6 HUD",
+    "nightHudDesc": "\u542f\u7528\u591c\u89c6\u589e\u5f3a\u8986\u76d6"
+  },
+  "ai": {
+    "title": "Machaview AI",
+    "placeholder": "\u95ee\u6211\u4efb\u4f55\u5173\u4e8e Machaview \u7684\u95ee\u9898...",
+    "listening": "\u6b63\u5728\u6536\u542c",
+    "processing": "\u5904\u7406\u4e2d",
+    "thinking": "\u601d\u8003\u4e2d..."
+  },
+  "media": {
+    "title": "\u5a92\u4f53",
+    "photos": "\u7167\u7247",
+    "videos": "\u89c6\u9891",
+    "noMedia": "\u6682\u65e0\u5a92\u4f53",
+    "noMediaDesc": "\u4f7f\u7528 Machaview \u62cd\u6444\u7684\u7167\u7247\u548c\u89c6\u9891\u5c06\u663e\u793a\u5728\u6b64\u5904",
+    "captureFirst": "\u5f00\u59cb\u62cd\u6444"
+  },
+  "settings": {
+    "title": "\u8bbe\u7f6e",
+    "language": "\u8bed\u8a00",
+    "theme": "\u4e3b\u9898",
+    "dark": "\u6df1\u8272",
+    "light": "\u6d45\u8272",
+    "auto": "\u81ea\u52a8",
+    "safety": "\u5b89\u5168\u8b66\u62a5",
+    "safetyDesc": "\u63a5\u6536\u9644\u8fd1\u5371\u9669\u8b66\u62a5",
+    "gestures": "\u624b\u52bf\u81ea\u5b9a\u4e49",
+    "gesturesDesc": "\u914d\u7f6e\u7728\u773c\u3001\u70b9\u5934\u548c\u8f7b\u89e6\u624b\u52bf",
+    "firmware": "\u56fa\u4ef6",
+    "firmwareVersion": "v2.4.1",
+    "firmwareStatus": "\u5df2\u662f\u6700\u65b0",
+    "deviceBattery": "\u8bbe\u5907\u7535\u6c60",
+    "signOut": "\u9000\u51fa\u767b\u5f55",
+    "about": "\u5173\u4e8e",
+    "version": "\u7248\u672c 1.0.0"
+  },
+  "popup": {
+    "welcome": "\u6b22\u8fce\u4f7f\u7528 Machaview",
+    "welcomeDesc": "\u60a8\u7684 AI \u667a\u80fd\u773c\u955c\u5df2\u51c6\u5907\u5c31\u7eea",
+    "features": "\u63a2\u7d22\u65b0\u529f\u80fd",
+    "featuresDesc": "\u53d1\u73b0 AI \u52a9\u624b\u3001\u5b9e\u65f6\u7ffb\u8bd1\u548c AR \u5bfc\u822a",
+    "lowBattery": "\u7535\u91cf\u4e0d\u8db3",
+    "lowBatteryDesc": "\u8bbe\u5907\u7535\u91cf\u4e3a 15%\uff0c\u8bf7\u5c3d\u5feb\u5145\u7535",
+    "nightMode": "\u591c\u89c6\u6a21\u5f0f",
+    "nightModeDesc": "\u5df2\u542f\u7528\u589e\u5f3a\u591c\u89c6\u529f\u80fd",
+    "dismiss": "\u5173\u95ed",
+    "explore": "\u63a2\u7d22",
+    "langChanged": "\u8bed\u8a00\u5df2\u66f4\u6539",
+    "langChangedDesc": "\u754c\u9762\u5df2\u5207\u6362\u5230\u4e2d\u6587"
+  },
+  "devicePanel": {
+    "title": "\u8bbe\u5907\u72b6\u6001",
+    "battery": "\u7535\u6c60",
+    "connectivity": "\u8fde\u63a5",
+    "bluetooth": "\u84dd\u7259 5.3",
+    "aiCloud": "AI \u4e91\u670d\u52a1",
+    "active": "\u5df2\u6fc0\u6d3b",
+    "firmware": "\u56fa\u4ef6\u7248\u672c",
+    "temperature": "\u8bbe\u5907\u6e29\u5ea6",
+    "syncStatus": "\u540c\u6b65\u72b6\u6001",
+    "synced": "\u5df2\u540c\u6b65",
+    "connected": "\u5df2\u8fde\u63a5"
+  },
+  "investor": {
+    "hero": "\u5851\u9020\u589e\u5f3a\u73b0\u5b9e\u7684\u672a\u6765",
+    "heroSub": "Machaview \u662f\u4e0b\u4e00\u4ee3 AI \u667a\u80fd\u773c\u955c\u5e73\u53f0",
+    "product": "\u4ea7\u54c1\u6982\u8ff0",
+    "productDesc": "1080p \u900f\u660e AR HUD\uff0c12\u5c0f\u65f6\u7eed\u822a\uff0c\u9aa8\u4f20\u5bfc\u97f3\u9891\uff0c\u5b9e\u65f6\u7ffb\u8bd1\uff0c\u8bed\u97f3\u63a7\u5236\uff0c\u5371\u9669\u8b66\u62a5",
+    "market": "\u5e02\u573a\u5b9a\u4f4d",
+    "marketDesc": "\u9762\u5411\u65e9\u671f\u91c7\u7528\u8005\u548c\u4f01\u4e1a\u7528\u6237\u7684\u9ad8\u7aef\u53ef\u7a7f\u6234 AI \u5e73\u53f0",
+    "vision": "\u613f\u666f\u58f0\u660e",
+    "visionDesc": "\u5230 2030 \u5e74\uff0c\u8ba9 10 \u4ebf\u4eba\u901a\u8fc7\u667a\u80fd\u773c\u955c\u4f53\u9a8c\u589e\u5f3a\u73b0\u5b9e",
+    "subscription": "\u8ba2\u9605\u6a21\u5f0f",
+    "subscriptionDesc": "\u5e74\u8d39 $199\uff0c\u5305\u542b AI \u4e91\u5904\u7406\u3001OTA \u66f4\u65b0\u548c\u4f18\u5148\u652f\u6301",
+    "roadmap": "\u672a\u6765\u8def\u7ebf\u56fe",
+    "roadmapItems": ["Q3 2026 - \u516c\u6d4b\u53d1\u5e03", "Q4 2026 - \u4f01\u4e1a SDK \u53d1\u5e03", "Q1 2027 - \u5904\u65b9\u955c\u7247\u652f\u6301", "Q2 2027 - AR \u5e94\u7528\u5e02\u573a\u4e0a\u7ebf", "Q4 2027 - \u4e0b\u4e00\u4ee3\u786c\u4ef6 v2"],
+    "metrics": "\u589e\u957f\u6307\u6807",
+    "preorders": "\u9884\u8ba2\u5355",
+    "revenue": "\u9884\u8ba1\u5e74\u6536\u5165",
+    "markets": "\u76ee\u6807\u5e02\u573a",
+    "backToApp": "\u8fd4\u56de\u5e94\u7528"
+  }
+}
