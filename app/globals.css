@@ -18,6 +18,34 @@
     -webkit-backdrop-filter: blur(40px) saturate(1.6);
     border: 1px solid hsl(var(--border) / 0.4);
   }
+  .glass-premium {
+    background: hsl(var(--card) / 0.5);
+    backdrop-filter: blur(32px) saturate(1.5);
+    -webkit-backdrop-filter: blur(32px) saturate(1.5);
+    border: 1px solid hsl(var(--border) / 0.3);
+    box-shadow:
+      0 4px 30px hsl(var(--background) / 0.3),
+      inset 0 1px 0 hsl(var(--foreground) / 0.03);
+  }
+  .glass-glow {
+    background: hsl(var(--card) / 0.4);
+    backdrop-filter: blur(24px) saturate(1.4);
+    -webkit-backdrop-filter: blur(24px) saturate(1.4);
+    border: 1px solid hsl(var(--border) / 0.25);
+    box-shadow:
+      0 0 40px hsl(160 60% 45% / 0.06),
+      0 8px 32px hsl(var(--background) / 0.4),
+      inset 0 1px 0 hsl(var(--foreground) / 0.04);
+  }
+  .shimmer-bg {
+    background: linear-gradient(
+      110deg,
+      transparent 25%,
+      hsl(var(--foreground) / 0.03) 37%,
+      transparent 63%
+    );
+    background-size: 200% 100%;
+  }
   .scanline {
     background: repeating-linear-gradient(
       0deg,

@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react"
 import { useI18n } from "@/lib/i18n-context"
+import { DistanceCard } from "./distance-card"
 
 interface HomeTabProps {
   onViewHud?: () => void
@@ -45,8 +46,11 @@ export function HomeTab({ onViewHud, onViewNightHud }: HomeTabProps) {
         <span className="text-4xl font-extralight tracking-wider text-foreground/80">{mounted ? time : "--:--"}</span>
       </div>
 
+      {/* Walking Distance Tracker */}
+      <DistanceCard />
+
       {/* Device Status Panel -- Premium */}
-      <div className="rounded-3xl glass p-5">
+      <div className="rounded-3xl glass-premium p-5">
         <h3 className="mb-4 text-[11px] font-light tracking-widest text-muted-foreground uppercase">
           {t("devicePanel.title")}
         </h3>
@@ -143,7 +147,7 @@ export function HomeTab({ onViewHud, onViewNightHud }: HomeTabProps) {
           <button
             type="button"
             onClick={onViewHud}
-            className="flex flex-1 items-center gap-3 rounded-2xl glass p-4 transition-all active:scale-[0.97]"
+            className="flex flex-1 items-center gap-3 rounded-2xl glass-premium p-4 transition-all active:scale-[0.97]"
           >
             <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-foreground/5">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" className="text-foreground/40">
@@ -181,7 +185,7 @@ export function HomeTab({ onViewHud, onViewNightHud }: HomeTabProps) {
             <button
               key={action.label}
               type="button"
-              className="flex flex-col items-center gap-2 rounded-2xl glass p-4 transition-all active:scale-[0.97] hover:bg-card/80"
+              className="flex flex-col items-center gap-2 rounded-2xl glass-premium p-4 transition-all active:scale-[0.97] hover:bg-card/80"
             >
               <action.icon />
               <span className="text-[10px] font-light tracking-wider text-foreground/50">{action.label}</span>
