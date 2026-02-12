@@ -128,6 +128,31 @@ const config: Config = {
           '0%, 60%, 100%': { opacity: '0.2', transform: 'translateY(0)' },
           '30%': { opacity: '1', transform: 'translateY(-4px)' },
         },
+        'distance-pulse': {
+          '0%, 100%': { transform: 'scale(1)', opacity: '1' },
+          '50%': { transform: 'scale(1.02)', opacity: '0.9' },
+        },
+        'shimmer': {
+          '0%': { backgroundPosition: '-200% 0' },
+          '100%': { backgroundPosition: '200% 0' },
+        },
+        'glow-ring': {
+          '0%, 100%': { opacity: '0.3', transform: 'scale(1)' },
+          '50%': { opacity: '0.6', transform: 'scale(1.05)' },
+        },
+        'splash-fade-in': {
+          '0%': { opacity: '0', transform: 'scale(0.95)' },
+          '100%': { opacity: '1', transform: 'scale(1)' },
+        },
+        'splash-fade-out': {
+          '0%': { opacity: '1', transform: 'scale(1)' },
+          '100%': { opacity: '0', transform: 'scale(1.02)' },
+        },
+        'counter-tick': {
+          '0%': { transform: 'translateY(0)' },
+          '25%': { transform: 'translateY(-2px)' },
+          '50%': { transform: 'translateY(0)' },
+        },
       },
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
@@ -144,6 +169,12 @@ const config: Config = {
         'modal-out': 'modal-out 0.2s ease-in forwards',
         'fade-in': 'fade-in 0.5s ease-out forwards',
         'typing-dot': 'typing-dot 1.4s ease-in-out infinite',
+        'distance-pulse': 'distance-pulse 2s ease-in-out infinite',
+        'shimmer': 'shimmer 3s linear infinite',
+        'glow-ring': 'glow-ring 3s ease-in-out infinite',
+        'splash-fade-in': 'splash-fade-in 1s ease-out forwards',
+        'splash-fade-out': 'splash-fade-out 0.8s ease-in forwards',
+        'counter-tick': 'counter-tick 0.3s ease-out',
       },
     },
   },
