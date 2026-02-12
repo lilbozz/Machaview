@@ -131,7 +131,7 @@
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-white text-black dark:bg-black dark:text-white;
     transition: background-color 0.3s ease, color 0.3s ease;
   }
 }

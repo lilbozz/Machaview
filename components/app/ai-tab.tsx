@@ -174,11 +174,11 @@ export function AITab() {
               <div
                 className={`max-w-[85%] rounded-2xl px-4 py-3 ${
                   msg.role === "user"
-                    ? "bg-foreground text-primary-foreground"
-                    : "glass"
+                    ? "bg-blue-500 text-white dark:bg-blue-600 dark:text-white"
+                    : "bg-gray-200 text-black dark:bg-gray-700 dark:text-gray-100"
                 }`}
               >
-                <p className="text-sm font-light leading-relaxed text-foreground/80">
+                <p className="text-sm font-light leading-relaxed">
                   {msg.role === "ai" && i === latestAiIndex ? <TypedText text={msg.text} /> : msg.text}
                 </p>
               </div>
