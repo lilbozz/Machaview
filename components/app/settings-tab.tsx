@@ -1,28 +1,30 @@
 "use client"
 
 import React, { useState, useEffect } from "react"
+import Link from "next/link"
 import { useI18n, localeLabels, type Locale } from "@/lib/i18n-context"
 import { useTheme, type ThemeMode } from "@/lib/theme-context"
+import { useSustainability } from "@/lib/sustainability-context"
 import { GlassPopup } from "./glass-popup"
 
 interface SettingsTabProps {
   onSignOut: () => void
+  batteryLevel?: number
 }
 
-export function SettingsTab({ onSignOut }: SettingsTabProps) {
+export function SettingsTab({ onSignOut, batteryLevel = 84 }: SettingsTabProps) {
   const { t, locale, setLocale } = useI18n()
   const { mode, setMode } = useTheme()
+  const { efficiencyScore, energyUsed, aiQueryCount, lowImpactMode, toggleLowImpactMode } = useSustainability()
   const [safety, setSafety] = useState(true)
   const [blinkConfirm, setBlinkConfirm] = useState(true)
   const [doubleTapZoom, setDoubleTapZoom] = useState(true)
   const [langPopup, setLangPopup] = useState(false)
-  const [batteryLevel, setBatteryLevel] = useState(84)
   const [deviceTemp, setDeviceTemp] = useState("34.2")
 
   useEffect(() => {
-    // Simulate slight battery/temp changes for realism
+    // Simulate slight temp changes for realism
     const interval = setInterval(() => {
-      setBatteryLevel((prev) => Math.max(10, prev - (Math.random() > 0.7 ? 1 : 0)))
       setDeviceTemp((30 + Math.random() * 6).toFixed(1))
     }, 30000)
     return () => clearInterval(interval)
@@ -34,12 +36,11 @@ export function SettingsTab({ onSignOut }: SettingsTabProps) {
   }
 
   return (
-    <div className="flex flex-col gap-6 px-6 pb-24 pt-6">
-      <h1 className="text-xl font-extralight tracking-wider text-foreground/90">{t("settings.title")}</h1>
+    <div className="flex flex-col gap-5 px-5 pb-8 pt-5">
 
       {/* Device Status Panel */}
       <SettingSection label={t("settings.deviceBattery")}>
-        <div className="rounded-3xl glass p-5">
+        <div className="rounded-2xl glass-premium p-5">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
               <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-emerald-500/10">
@@ -78,7 +79,7 @@ export function SettingsTab({ onSignOut }: SettingsTabProps) {
             {/* Temperature */}
             <div className="flex items-center justify-between">
               <span className="text-xs font-light text-foreground/40">{t("devicePanel.temperature")}</span>
-              <span className="text-xs font-light text-foreground/50">{deviceTemp} C</span>
+              <span className="text-xs font-light text-foreground/50">{deviceTemp}°C</span>
             </div>
             {/* Firmware */}
             <div className="flex items-center justify-between">
@@ -99,7 +100,7 @@ export function SettingsTab({ onSignOut }: SettingsTabProps) {
 
       {/* Language */}
       <SettingSection label={t("settings.language")}>
-        <div className="flex items-center gap-0.5 rounded-2xl glass p-1">
+        <div className="flex items-center gap-0.5 rounded-2xl glass-premium p-1">
           {(Object.keys(localeLabels) as Locale[]).map((l) => (
             <button
               key={l}
@@ -117,7 +118,7 @@ export function SettingsTab({ onSignOut }: SettingsTabProps) {
 
       {/* Theme */}
       <SettingSection label={t("settings.theme")}>
-        <div className="flex items-center gap-0.5 rounded-2xl glass p-1">
+        <div className="flex items-center gap-0.5 rounded-2xl glass-premium p-1">
           {(["dark", "light", "auto"] as ThemeMode[]).map((m) => (
             <button
               key={m}
@@ -134,8 +135,8 @@ export function SettingsTab({ onSignOut }: SettingsTabProps) {
       </SettingSection>
 
       {/* Safety */}
-      <SettingSection label={t("settings.safety")}>
-        <div className="flex items-center justify-between rounded-2xl glass p-4">
+      <SettingSection label={t("settings.safetySection")}>
+        <div className="flex items-center justify-between rounded-2xl glass-premium px-4 py-3.5">
           <div className="flex flex-col gap-0.5">
             <span className="text-sm font-light text-foreground/70">{t("settings.safety")}</span>
             <span className="text-[11px] font-light text-foreground/30">{t("settings.safetyDesc")}</span>
@@ -146,31 +147,75 @@ export function SettingsTab({ onSignOut }: SettingsTabProps) {
 
       {/* Gestures */}
       <SettingSection label={t("settings.gestures")}>
-        <div className="flex flex-col rounded-2xl glass divide-y divide-foreground/[0.04]">
-          <div className="flex items-center justify-between p-4">
+        <div className="flex flex-col rounded-2xl glass-premium divide-y divide-border/30">
+          <div className="flex items-center justify-between px-4 py-3.5">
             <div className="flex flex-col gap-0.5">
-              <span className="text-sm font-light text-foreground/70">{t("settings.gestures")}</span>
+              <span className="text-sm font-light text-foreground/75">{t("settings.blinkConfirm")}</span>
               <span className="text-[11px] font-light text-foreground/30">{t("settings.gesturesDesc")}</span>
             </div>
-          </div>
-          <div className="flex items-center justify-between px-4 py-3">
-            <span className="text-xs font-light text-foreground/50">Blink to confirm</span>
             <ToggleSwitch checked={blinkConfirm} onChange={setBlinkConfirm} />
           </div>
-          <div className="flex items-center justify-between px-4 py-3">
-            <span className="text-xs font-light text-foreground/50">Double-tap zoom</span>
+          <div className="flex items-center justify-between px-4 py-3.5">
+            <span className="text-sm font-light text-foreground/75">{t("settings.doubleTapZoom")}</span>
             <ToggleSwitch checked={doubleTapZoom} onChange={setDoubleTapZoom} />
           </div>
         </div>
       </SettingSection>
 
+      {/* Sustainability */}
+      <SettingSection label={t("sustainability.title")}>
+        <div className="flex flex-col rounded-2xl glass-premium overflow-hidden divide-y divide-border/30">
+          {/* Summary row */}
+          <div className="grid grid-cols-3 divide-x divide-border/30">
+            <div className="flex flex-col items-center gap-0.5 py-3">
+              <span className="tabular text-base font-extralight text-emerald-400">{efficiencyScore}</span>
+              <span className="text-[9px] font-light tracking-wider text-foreground/30 uppercase">{t("sustainability.score")}</span>
+            </div>
+            <div className="flex flex-col items-center gap-0.5 py-3">
+              <span className="tabular text-base font-extralight text-foreground/60">{energyUsed.toFixed(1)}</span>
+              <span className="text-[9px] font-light tracking-wider text-foreground/30 uppercase">{t("sustainability.mwh")}</span>
+            </div>
+            <div className="flex flex-col items-center gap-0.5 py-3">
+              <span className="tabular text-base font-extralight text-foreground/60">{aiQueryCount}</span>
+              <span className="text-[9px] font-light tracking-wider text-foreground/30 uppercase">{t("sustainability.aiQueries")}</span>
+            </div>
+          </div>
+          {/* Low-impact toggle row */}
+          <div className="flex items-center justify-between px-4 py-3.5">
+            <div className="flex flex-col gap-0.5">
+              <span className="text-sm font-light text-foreground/75">{t("sustainability.lowImpact")}</span>
+              <span className="text-[11px] font-light text-foreground/30">{t("sustainability.lowImpactDesc")}</span>
+            </div>
+            <ToggleSwitch checked={lowImpactMode} onChange={() => toggleLowImpactMode()} />
+          </div>
+        </div>
+      </SettingSection>
+
       {/* About + Sign Out */}
-      <div className="flex flex-col gap-3 pt-2">
-        <div className="rounded-2xl glass p-4">
-          <div className="flex items-center justify-between">
-            <span className="text-sm font-light text-foreground/70">{t("settings.about")}</span>
+      <div className="flex flex-col gap-2.5 pt-1">
+        <div className="rounded-2xl glass-premium overflow-hidden divide-y divide-border/30">
+          <div className="flex items-center justify-between px-4 py-3.5">
+            <span className="text-sm font-light text-foreground/75">{t("settings.about")}</span>
             <span className="text-xs font-light text-foreground/30">{t("settings.version")}</span>
           </div>
+          <Link
+            href="/investor"
+            className="flex items-center justify-between px-4 py-3.5 transition-colors active:bg-foreground/[0.03]"
+          >
+            <span className="text-sm font-light text-foreground/50">Investor Deck</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" className="text-foreground/20">
+              <path d="M9 18l6-6-6-6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </Link>
+          <Link
+            href="/Dashboard"
+            className="flex items-center justify-between px-4 py-3.5 transition-colors active:bg-foreground/[0.03]"
+          >
+            <span className="text-sm font-light text-foreground/50">GPS Dashboard</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" className="text-foreground/20">
+              <path d="M9 18l6-6-6-6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </Link>
         </div>
         <button
           type="button"
@@ -181,7 +226,7 @@ export function SettingsTab({ onSignOut }: SettingsTabProps) {
         </button>
       </div>
 
-      <p className="pt-2 text-center text-[10px] font-extralight tracking-widest text-foreground/15">
+      <p className="pt-1 text-center text-[10px] font-extralight tracking-widest text-foreground/15">
         Machaview by Paggy Industries
       </p>
 
@@ -226,7 +271,7 @@ function ToggleSwitch({ checked, onChange }: { checked: boolean; onChange: (v: b
 function SettingSection({ label, children }: { label: string; children: React.ReactNode }) {
   return (
     <div className="flex flex-col gap-2">
-      <span className="text-[11px] font-light tracking-widest text-muted-foreground uppercase">{label}</span>
+      <span className="text-[10px] font-light tracking-[0.2em] text-foreground/30 uppercase">{label}</span>
       {children}
     </div>
   )

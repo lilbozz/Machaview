@@ -1,13 +1,22 @@
 "use client"
 
 import { useState, useEffect } from "react"
+import { useI18n } from "@/lib/i18n-context"
+
+const STREETS = ["Sukhumvit Road", "Silom Avenue", "Ratchadamri Blvd", "Phahon Yothin Rd", "Asok Intersection"]
 
 export function NavigationMode() {
-  const [distance, setDistance] = useState(240)
+  const { t } = useI18n()
+  const [nav, setNav] = useState({ distance: 240, streetIdx: 0 })
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setDistance((prev) => (prev > 10 ? prev - 3 : 240))
+      setNav((prev) => {
+        if (prev.distance <= 10) {
+          return { distance: 240, streetIdx: (prev.streetIdx + 1) % STREETS.length }
+        }
+        return { ...prev, distance: prev.distance - 3 }
+      })
     }, 800)
     return () => clearInterval(interval)
   }, [])
@@ -43,7 +52,7 @@ export function NavigationMode() {
       {/* Distance */}
       <div className="text-center">
         <span className="text-2xl font-extralight tracking-wider text-foreground/60">
-          {distance}
+          {nav.distance}
         </span>
         <span className="ml-1 text-xs font-extralight tracking-wider text-foreground/35">
           m
@@ -53,13 +62,13 @@ export function NavigationMode() {
       {/* Street name */}
       <div className="animate-slide-up rounded-xl border border-foreground/[0.06] bg-foreground/[0.03] px-5 py-2.5 backdrop-blur-sm">
         <p className="text-[11px] font-light tracking-wider text-foreground/50">
-          Sukhumvit Road
+          {STREETS[nav.streetIdx]}
         </p>
       </div>
 
       {/* ETA */}
       <div className="flex items-center gap-3 text-[10px] font-extralight tracking-widest text-foreground/30">
-        <span>ETA 12 min</span>
+        <span>{t("hud.eta")} 12 {t("hud.min")}</span>
         <span className="h-0.5 w-0.5 rounded-full bg-foreground/20" />
         <span>2.4 km</span>
       </div>

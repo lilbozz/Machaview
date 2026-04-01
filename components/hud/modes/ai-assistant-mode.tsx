@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
+import { useI18n } from "@/lib/i18n-context"
 
 interface AIResponse {
   query: string
@@ -27,6 +28,7 @@ const scenarios: AIResponse[] = [
 ]
 
 export function AIAssistantMode() {
+  const { t } = useI18n()
   const [currentScenario, setCurrentScenario] = useState(0)
   const [phase, setPhase] = useState<"listening" | "processing" | "response">("listening")
 
@@ -51,16 +53,19 @@ export function AIAssistantMode() {
     <div className="flex flex-col items-center gap-4">
       {/* Voice indicator */}
       <div className="flex items-center gap-3">
-        <div className="relative flex items-center justify-center">
+        <div className="relative flex h-5 w-5 items-center justify-center">
           <div className="h-2 w-2 rounded-full bg-foreground/60" />
           {phase === "listening" && (
-            <div className="absolute inset-0 h-2 w-2 animate-pulse-ring rounded-full bg-foreground/40" />
+            <div className="absolute inset-0 animate-pulse-ring rounded-full border border-foreground/30" />
+          )}
+          {phase === "processing" && (
+            <div className="absolute inset-0 animate-breathing rounded-full border border-foreground/20" />
           )}
         </div>
-        <span className="text-[11px] font-light tracking-widest text-foreground/40 uppercase">
-          {phase === "listening" && "Listening"}
-          {phase === "processing" && "Processing"}
-          {phase === "response" && "Machaview AI"}
+        <span className="text-[11px] font-light tracking-widest text-foreground/50 uppercase">
+          {phase === "listening" && t("hud.listening")}
+          {phase === "processing" && t("hud.processing")}
+          {phase === "response" && t("hud.machaviewAI")}
         </span>
       </div>
 
@@ -77,6 +82,10 @@ export function AIAssistantMode() {
       {phase === "response" && (
         <div className="animate-slide-up max-w-sm">
           <div className="rounded-2xl border border-foreground/[0.08] bg-foreground/[0.05] px-5 py-4 backdrop-blur-md">
+            <div className="mb-2 flex items-center justify-between">
+              <span className="text-[9px] font-light tracking-[0.2em] text-foreground/30 uppercase">{t("hud.aiResponse")}</span>
+              <span className="rounded-full border border-foreground/[0.08] px-2 py-0.5 text-[8px] font-light tracking-widest text-foreground/20 uppercase">{t("hud.demo")}</span>
+            </div>
             <p className="text-[13px] font-light leading-relaxed tracking-wide text-foreground/70">
               {scenario.response}
             </p>
@@ -86,7 +95,7 @@ export function AIAssistantMode() {
                   type="button"
                   className="text-[10px] font-light tracking-widest text-foreground/30 uppercase"
                 >
-                  Dismiss
+                  {t("hud.dismiss")}
                 </button>
                 <button
                   type="button"
@@ -105,14 +114,14 @@ export function AIAssistantMode() {
                 <path d="M19 10v2a7 7 0 01-14 0v-2" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
                 <path d="M12 19v3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
               </svg>
-              Voice
+              {t("hud.voice")}
             </span>
             <span className="flex items-center gap-1 text-[9px] font-light tracking-widest text-foreground/25 uppercase">
               <svg width="10" height="10" viewBox="0 0 24 24" fill="none" className="text-foreground/25">
                 <circle cx="12" cy="12" r="3" fill="currentColor" />
                 <path d="M2 12s4-8 10-8 10 8 10 8-4 8-10 8-10-8-10-8z" stroke="currentColor" strokeWidth="1.5" />
               </svg>
-              Blink
+              {t("hud.blink")}
             </span>
           </div>
         </div>

@@ -212,14 +212,20 @@ function LoginScreen({
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [error, setError] = useState("")
+  const [forgotMsg, setForgotMsg] = useState(false)
 
   const handleSubmit = () => {
     if (!email.trim() || !password.trim()) {
-      setError("Please fill in all fields")
+      setError(t("auth.requiredFields"))
       setTimeout(() => setError(""), 2000)
       return
     }
     onSubmit()
+  }
+
+  const handleForgot = () => {
+    setForgotMsg(true)
+    setTimeout(() => setForgotMsg(false), 2500)
   }
 
   return (
@@ -231,8 +237,12 @@ function LoginScreen({
         {error && (
           <p className="animate-fade-in text-center text-xs font-light text-destructive/80">{error}</p>
         )}
+        {forgotMsg && (
+          <p className="animate-fade-in text-center text-xs font-light text-foreground/40">{t("auth.forgotMessage")}</p>
+        )}
         <button
           type="button"
+          onClick={handleForgot}
           className="self-end text-[11px] font-light tracking-wider text-foreground/30 transition-colors hover:text-foreground/50"
         >
           {t("login.forgotPassword")}
@@ -272,12 +282,12 @@ function RegisterScreen({
 
   const handleSubmit = () => {
     if (!name.trim() || !email.trim() || !password.trim()) {
-      setError("Please fill in all fields")
+      setError(t("auth.requiredFields"))
       setTimeout(() => setError(""), 2000)
       return
     }
     if (password !== confirm) {
-      setError("Passwords do not match")
+      setError(t("auth.passwordMismatch"))
       setTimeout(() => setError(""), 2000)
       return
     }

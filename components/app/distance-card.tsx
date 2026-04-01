@@ -2,9 +2,11 @@
 
 import { useState, useEffect, useRef } from "react"
 import { useWalkingDistance } from "@/hooks/use-walking-distance"
+import { useI18n } from "@/lib/i18n-context"
 
 export function DistanceCard() {
   const [mounted, setMounted] = useState(false)
+  const { t } = useI18n()
   const { displayDistance, isTracking, error, currentPosition, resetDistance } =
     useWalkingDistance()
   const [showPulse, setShowPulse] = useState(false)
@@ -74,7 +76,7 @@ export function DistanceCard() {
             </div>
             <div className="flex flex-col gap-0.5">
               <span className="text-[11px] font-light tracking-widest text-foreground/50 uppercase">
-                Walking Distance
+                {t("distanceCard.title")}
               </span>
               <div className="flex items-center gap-1.5">
                 <span
@@ -83,7 +85,7 @@ export function DistanceCard() {
                   }`}
                 />
                 <span className="text-[10px] font-light text-foreground/30">
-                  {isTracking ? "Live tracking" : error || "Waiting..."}
+                  {isTracking ? t("distanceCard.liveTracking") : error || t("distanceCard.waiting")}
                 </span>
               </div>
             </div>
@@ -92,9 +94,9 @@ export function DistanceCard() {
             type="button"
             onClick={resetDistance}
             className="rounded-xl border border-foreground/10 bg-foreground/5 px-3 py-1.5 text-[10px] font-light tracking-wider text-foreground/40 transition-all hover:border-foreground/20 hover:text-foreground/60 active:scale-[0.95]"
-            aria-label="Reset distance"
+            aria-label={t("distanceCard.reset")}
           >
-            Reset
+            {t("distanceCard.reset")}
           </button>
         </div>
 
@@ -140,7 +142,7 @@ export function DistanceCard() {
         <div className="mt-1.5 flex items-center justify-between">
           <span className="text-[9px] font-light text-foreground/15">0 km</span>
           <span className="text-[9px] font-light text-foreground/15">
-            10 km goal
+            {t("distanceCard.goal")}
           </span>
         </div>
       </div>

@@ -41,7 +41,9 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
 
   const setMode = useCallback((m: ThemeMode) => {
     setModeState(m)
-    localStorage.setItem("machaview-theme", m)
+    try {
+      localStorage.setItem("machaview-theme", m)
+    } catch {}
   }, [])
 
   return (

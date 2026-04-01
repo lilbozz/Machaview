@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
+import Link from "next/link"
 import { useWalkingDistance } from "@/hooks/use-walking-distance"
 import { DistanceCard } from "@/components/app/distance-card"
 
@@ -18,6 +19,17 @@ export default function Dashboard() {
 
   return (
     <div className="min-h-screen bg-background p-6">
+      {/* Back nav */}
+      <Link
+        href="/"
+        className="mb-6 flex items-center gap-1.5 self-start text-[11px] font-light tracking-wider text-foreground/30 transition-colors hover:text-foreground/60"
+      >
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+          <path d="M15 18l-6-6 6-6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+        Back to App
+      </Link>
+
       {/* Header */}
       <div className="mb-6 flex items-center gap-3">
         <div className="flex h-10 w-10 items-center justify-center rounded-2xl glass-premium">

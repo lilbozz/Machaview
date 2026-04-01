@@ -1,6 +1,7 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
+import { useI18n } from "@/lib/i18n-context"
 import { TimeDisplay } from "./time-display"
 import { BatteryIndicator } from "./battery-indicator"
 import { LocationLabel } from "./location-label"
@@ -13,24 +14,19 @@ import { CaptureMode } from "./modes/capture-mode"
 import { DangerAlertMode } from "./modes/danger-alert-mode"
 import { MusicMode } from "./modes/music-mode"
 
-type HudMode = "home" | "ai" | "translate" | "navigate" | "capture" | "danger" | "music"
+export type HudMode = "home" | "ai" | "translate" | "navigate" | "capture" | "danger" | "music"
 
-const modeLabels: Record<HudMode, string> = {
-  home: "Home",
-  ai: "AI",
-  translate: "Translate",
-  navigate: "Navigate",
-  capture: "Capture",
-  danger: "Alert",
-  music: "Music",
-}
+const HUD_MODES: HudMode[] = ["home", "ai", "translate", "navigate", "capture", "danger", "music"]
 
 interface HudOverlayProps {
   nightMode?: boolean
+  initialMode?: HudMode
+  batteryLevel?: number
 }
 
-export function HudOverlay({ nightMode = false }: HudOverlayProps) {
-  const [mode, setMode] = useState<HudMode>("home")
+export function HudOverlay({ nightMode = false, initialMode = "home", batteryLevel = 84 }: HudOverlayProps) {
+  const { t } = useI18n()
+  const [mode, setMode] = useState<HudMode>(initialMode)
 
   return (
     <main className="animate-hud-fade-in fixed inset-0 select-none opacity-0">
@@ -75,12 +71,12 @@ export function HudOverlay({ nightMode = false }: HudOverlayProps) {
             <LocationLabel />
             {nightMode && (
               <span className="animate-breathing mt-1 self-start rounded-full border border-emerald-500/20 bg-emerald-500/10 px-2.5 py-0.5 text-[9px] font-light tracking-[0.2em] text-emerald-400/70 uppercase">
-                NV Active
+                {t("hud.nvActive")}
               </span>
             )}
           </div>
           <div className="flex flex-col items-end gap-1">
-            <BatteryIndicator />
+            <BatteryIndicator level={batteryLevel} />
             <ConnectivityIndicator />
           </div>
         </div>
@@ -100,7 +96,7 @@ export function HudOverlay({ nightMode = false }: HudOverlayProps) {
             className="flex items-center gap-0.5 rounded-full border border-foreground/[0.06] bg-foreground/[0.03] p-1 backdrop-blur-md"
             aria-label="HUD mode selector"
           >
-            {(Object.keys(modeLabels) as HudMode[]).map((m) => (
+            {HUD_MODES.map((m) => (
               <button
                 key={m}
                 type="button"
@@ -111,7 +107,7 @@ export function HudOverlay({ nightMode = false }: HudOverlayProps) {
                     : "text-foreground/30 hover:text-foreground/50"
                 }`}
               >
-                {modeLabels[m]}
+                {t(`hud.${m}`)}
               </button>
             ))}
           </nav>
@@ -125,15 +121,33 @@ export function HudOverlay({ nightMode = false }: HudOverlayProps) {
 }
 
 function HomeMode() {
+  const { t } = useI18n()
+  const statuses = [
+    t("hud.statusListening"),
+    t("hud.statusReady"),
+    t("hud.statusCommand"),
+    t("hud.statusStandby"),
+    t("hud.statusAiActive"),
+  ]
+  const [statusIdx, setStatusIdx] = useState(0)
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setStatusIdx((i) => (i + 1) % statuses.length)
+    }, 3000)
+    return () => clearInterval(interval)
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
   return (
     <div className="animate-subtitle-fade flex flex-col items-center gap-3">
       <div className="rounded-xl border border-foreground/[0.06] bg-foreground/[0.04] px-6 py-2.5 backdrop-blur-sm md:px-8 md:py-3">
         <span className="animate-breathing text-[13px] font-extralight tracking-wider text-foreground/60 md:text-sm">
-          Listening...
+          {statuses[statusIdx]}
         </span>
       </div>
       <p className="max-w-xs text-center text-[10px] font-extralight leading-relaxed tracking-wider text-foreground/20">
-        Say a command or switch modes below
+        {t("hud.statusInstruction")}
       </p>
     </div>
   )

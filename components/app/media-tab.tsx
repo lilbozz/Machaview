@@ -5,7 +5,10 @@ import { useI18n } from "@/lib/i18n-context"
 
 type MediaFilter = "photos" | "videos"
 
-const demoPhotos = [
+type Photo = { id: number; gradient: string; label: string }
+type Video = { id: number; gradient: string; label: string; duration: string }
+
+const initialPhotos: Photo[] = [
   { id: 1, gradient: "135deg, hsl(200 30% 12%) 0%, hsl(200 20% 18%) 100%", label: "Bangkok skyline" },
   { id: 2, gradient: "180deg, hsl(150 20% 10%) 0%, hsl(150 15% 16%) 100%", label: "Temple garden" },
   { id: 3, gradient: "120deg, hsl(30 25% 12%) 0%, hsl(30 20% 18%) 100%", label: "Street food" },
@@ -14,7 +17,7 @@ const demoPhotos = [
   { id: 6, gradient: "90deg, hsl(260 15% 12%) 0%, hsl(260 10% 18%) 100%", label: "Sunset" },
 ]
 
-const demoVideos = [
+const initialVideos: Video[] = [
   { id: 1, gradient: "135deg, hsl(0 20% 12%) 0%, hsl(0 15% 18%) 100%", label: "Walk through Siam", duration: "0:42" },
   { id: 2, gradient: "180deg, hsl(40 25% 10%) 0%, hsl(40 20% 16%) 100%", label: "Boat ride", duration: "1:15" },
 ]
@@ -23,20 +26,34 @@ export function MediaTab() {
   const { t } = useI18n()
   const [filter, setFilter] = useState<MediaFilter>("photos")
   const [selectedId, setSelectedId] = useState<number | null>(null)
+  const [photos, setPhotos] = useState(initialPhotos)
+  const [videos, setVideos] = useState(initialVideos)
+  const [copiedId, setCopiedId] = useState<number | null>(null)
 
-  const items = filter === "photos" ? demoPhotos : demoVideos
+  const items = filter === "photos" ? photos : videos
+
+  const handleDelete = (id: number) => {
+    if (filter === "photos") setPhotos((prev) => prev.filter((p) => p.id !== id))
+    else setVideos((prev) => prev.filter((v) => v.id !== id))
+    setSelectedId(null)
+  }
+
+  const handleShare = (id: number) => {
+    setCopiedId(id)
+    setTimeout(() => setCopiedId(null), 2000)
+  }
 
   return (
-    <div className="flex flex-col gap-6 px-6 pb-24 pt-6">
+    <div className="flex flex-col gap-5 px-5 pb-8 pt-5">
       <div className="flex items-center justify-between">
-        <h1 className="text-xl font-extralight tracking-wider text-foreground/90">{t("media.title")}</h1>
-        <span className="text-xs font-light text-foreground/30">
+        <span className="text-[10px] font-light tracking-[0.2em] text-foreground/30 uppercase">{t("media.title")}</span>
+        <span className="text-[10px] font-light text-foreground/25">
           {items.length} {filter === "photos" ? t("media.photos") : t("media.videos")}
         </span>
       </div>
 
       {/* Filter */}
-      <div className="flex items-center gap-0.5 self-start rounded-2xl glass p-1">
+      <div className="flex items-center gap-0.5 self-start rounded-2xl glass-premium p-1">
         {(["photos", "videos"] as MediaFilter[]).map((f) => (
           <button
             key={f}
@@ -50,6 +67,20 @@ export function MediaTab() {
           </button>
         ))}
       </div>
+
+      {/* Empty state */}
+      {items.length === 0 && (
+        <div className="flex flex-col items-center justify-center gap-3 py-12">
+          <div className="flex h-12 w-12 items-center justify-center rounded-2xl glass">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" className="text-foreground/25">
+              <rect x="2" y="6" width="20" height="14" rx="3" stroke="currentColor" strokeWidth="1.2" />
+              <circle cx="12" cy="13" r="4" stroke="currentColor" strokeWidth="1.2" />
+              <path d="M15 2h-6l-1 4h8l-1-4z" stroke="currentColor" strokeWidth="1.2" strokeLinejoin="round" />
+            </svg>
+          </div>
+          <p className="text-[11px] font-light text-foreground/30">{t("media.noMedia")}</p>
+        </div>
+      )}
 
       {/* Gallery Grid */}
       <div className={`grid gap-1.5 ${filter === "photos" ? "grid-cols-3" : "grid-cols-2"}`}>
@@ -87,20 +118,26 @@ export function MediaTab() {
 
       {/* Selected detail */}
       {selectedId !== null && (
-        <div className="animate-slide-up rounded-2xl glass p-4 opacity-0">
+        <div className="animate-slide-up rounded-2xl glass-premium px-4 py-3.5 opacity-0">
           <div className="flex items-center justify-between">
             <div className="flex flex-col gap-0.5">
               <span className="text-sm font-light text-foreground/60">
                 {items.find((i) => i.id === selectedId)?.label}
               </span>
-              <span className="text-[10px] font-light text-foreground/25">Captured via Machaview</span>
+              <span className="text-[10px] font-light text-foreground/25">{t("media.capturedVia")}</span>
             </div>
             <div className="flex items-center gap-2">
               <button
                 type="button"
-                className="rounded-full glass p-2 transition-all active:scale-[0.95]"
-                aria-label="Share"
+                onClick={() => handleShare(selectedId)}
+                className="relative rounded-full glass p-2 transition-all active:scale-[0.95]"
+                aria-label={t("media.share")}
               >
+                {copiedId === selectedId ? (
+                  <span className="absolute -top-7 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full bg-foreground/10 px-2 py-0.5 text-[9px] font-light text-foreground/60">
+                    {t("media.linkCopied")}
+                  </span>
+                ) : null}
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" className="text-foreground/40">
                   <circle cx="18" cy="5" r="3" stroke="currentColor" strokeWidth="1.5" />
                   <circle cx="6" cy="12" r="3" stroke="currentColor" strokeWidth="1.5" />
@@ -110,10 +147,11 @@ export function MediaTab() {
               </button>
               <button
                 type="button"
+                onClick={() => handleDelete(selectedId)}
                 className="rounded-full glass p-2 transition-all active:scale-[0.95]"
-                aria-label="Delete"
+                aria-label={t("media.delete")}
               >
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" className="text-foreground/40">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" className="text-destructive/60">
                   <path d="M3 6h18M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
               </button>
@@ -125,7 +163,7 @@ export function MediaTab() {
       {/* Capture CTA */}
       <button
         type="button"
-        className="mt-2 flex items-center justify-center gap-2 self-center rounded-full glass px-5 py-2.5 text-xs font-light tracking-wider text-foreground/50 transition-all active:scale-[0.97]"
+        className="mt-1 flex items-center justify-center gap-2 self-center rounded-full glass-premium px-5 py-2.5 text-xs font-light tracking-wider text-foreground/40 transition-all active:scale-[0.97]"
       >
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" className="text-foreground/40">
           <rect x="2" y="6" width="20" height="14" rx="3" stroke="currentColor" strokeWidth="1.2" />
